@@ -1,0 +1,7 @@
+{
+  "name": "AppNerio",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
