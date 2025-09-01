@@ -1,0 +1,20 @@
+ion-card {
+  margin: 16px;
+  border-radius: 18px;
+}
+
+.field {
+  --background: var(--ion-color-light, #f6f7f9);
+  --border-radius: 14px;
+  margin-top: 10px;
+}
+
+.already {
+  text-align: left;
+  margin: 12px 6px 6px;
+  a { color: #3880ff; cursor: pointer; font-weight: 500; }
+}
+
+.no-padding {
+  padding: 0;
+}

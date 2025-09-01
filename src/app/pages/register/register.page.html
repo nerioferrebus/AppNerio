@@ -1,13 +1,73 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <ion-card>
+      <ion-card-content>
+
+        <!-- nombre y sobrenombre obrigado -->
+        <ion-grid class="no-padding">
+          <ion-row>
+    <ion-col size="6" sizeMd="6" sizeSm="12">
+      <ion-item class="field">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="firstName"></ion-input>
+              </ion-item>
+    </ion-col>
+
+   <ion-col size="6" sizeMd="6" sizeSm="12">
+      <ion-item class="field">
+     <ion-label position="floating">Last name</ion-label>
+      <ion-input formControlName="lastName"></ion-input>
+         </ion-item>
+            </ion-col>
+     </ion-row>
+        </ion-grid>
+    <!-- este no me sale es el de pruebita :C -->
+      <ion-item class="field">
+    <ion-label>Country</ion-label>
+    <ion-select formControlName="country" placeholder="Country" interface="popover">
+     <ion-select-option *ngFor="let c of countries22" [value]="c.name">
+              {{ c.flag }} {{ c.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- correo -->
+        <ion-item class="field">
+     <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <!-- contraseña -->
+        <ion-item class="field">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input [type]="showPass ? 'text' : 'password'" formControlName="password"></ion-input>
+          <ion-button fill="clear" slot="end" (click)="togglePass()" aria-label="toggle password">
+            <ion-icon [name]="showPass ? 'eye-off' : 'eye'"></ion-icon>
+       </ion-button>
+        </ion-item>
+        <!-- Confirmar contraseña -->
+        <ion-item class="field" [class.invalid]="registerForm.hasError('mismatch') && registerForm.touched">
+          <ion-label position="floating">Confirm password</ion-label>
+          <ion-input [type]="showConfirm ? 'text' : 'password'" formControlName="confirmPassword"></ion-input>
+          <ion-button fill="clear" slot="end" (click)="toggleConfirm()" aria-label="toggle confirm password">
+            <ion-icon [name]="showConfirm ? 'eye-off' : 'eye'"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-note color="danger" *ngIf="registerForm.hasError('mismatch') && registerForm.touched">
+          Passwords do not match
+        </ion-note>
+
+        <!-- boton de ya estas registrado con texto -->
+        <div class="already">
+          <a (click)="goToLogin()">Already registered?</a>
+        </div>
+
+        <!-- boton de registro-->
+        <ion-button expand="block" type="submit" color="primary" [disabled]="registerForm.invalid">
+          <ion-icon slot="start" name="person-add-outline"></ion-icon>
+          Sign Up
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>
