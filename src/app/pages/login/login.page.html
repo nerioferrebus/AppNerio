@@ -1,42 +1,53 @@
 <ion-content [fullscreen]="true">
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
- <ion-card>
-  <ion-card-content>
+    <ion-card>
+<ion-img src="assets/img/Breaking-News.jpg" style="height: 150px; object-fit: cover;"></ion-img>
 
-    <ion-row>
-<ion-col>
-  <ion-input
-   type="email" 
-   label="email"
-   placeholder="name@mail.com"
-   labelPlacement="floating"
-   formControlName="email"
-   ></ion-input>
-</ion-col>
-</ion-row>
+      <ion-card-content>
 
-    <ion-row>
-<ion-col>
-  <ion-input
-   type="password" 
-   label="Password"
-   placeholder="*******"
-   labelPlacement="floating"
-   formControlName="password"
-   ></ion-input>
-</ion-col>
-</ion-row>
-<ion-row>
-<ion-col>
-  <ion-button 
-  type="submit" 
-  color="primary"
-  [disabled]="loginForm.invalid"
-  >Login</ion-button>
-</ion-col>
-</ion-row>
-  </ion-card-content>
+        <!-- Email -->
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
- </ion-card>
- </form>
+        <!-- Password -->
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  <div style="text-align: center; margin-top: 12px;">
+          <a (click)="goToRegister()" style="color: #3880ff; cursor: pointer; text-decoration: underline;">
+            Create account
+          </a>
+        </div>
+        <!-- Botón -->
+        <ion-row>
+           
+          <ion-col>
+            <ion-button
+              type="submit"
+              expand="block"
+              color="warning"
+              (click)="onLogin()"
+              [disabled]="loginForm.invalid"
+            >
+              Login
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+           
+
+  </form>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ValueAccessor } from '@ionic/angular/common';
 import { __values } from 'tslib';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ public password!: FormControl;
 public loginForm!: FormGroup;
 public r!: FormBuilder;
 
-  constructor() {
+  constructor(private router: Router) {
 
     this.initForm();
 
@@ -24,8 +25,15 @@ public r!: FormBuilder;
   ngOnInit() {}
 
  public onLogin(){
+  console.log('onLogin() disparado');
   console.log(this.loginForm.value)
  }
+
+
+
+ public goToRegister() {
+  this.router.navigate(['/register']);
+}
 
 
   private initForm(){
