@@ -55,13 +55,16 @@ countries22: Array<{ name: string; flag?: string }> = [
   }
 
   private loadCountries() {
-    this.loadingCountries = true;
-    this.countriesError = '';
-    this.countriesSrv.getCountries().subscribe({
-      next: (list) => (this.countries = list),
-      error: () => (this.countriesError = 'No se pudieron cargar los países.'),
-      complete: () => (this.loadingCountries = false),
-    });
+     this.loadingCountries = true;
+  this.countriesSrv.getCountries().subscribe({
+    next: (list) => (this.countries = list),
+    error: (err) => {
+      console.error('Error cargando países:', err);
+      this.countriesError = 'No se pudieron cargar los países. Usando lista local.';
+      this.countries = this.countries22 as any;
+    },
+    complete: () => (this.loadingCountries = false),
+  });
   }
 
   private passwordMatch = (form: FormGroup) => {

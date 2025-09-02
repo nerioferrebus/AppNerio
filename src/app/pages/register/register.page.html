@@ -24,11 +24,11 @@
     <!-- este no me sale es el de pruebita :C -->
       <ion-item class="field">
     <ion-label>Country</ion-label>
-    <ion-select formControlName="country" placeholder="Country" interface="popover">
-     <ion-select-option *ngFor="let c of countries22" [value]="c.name">
-              {{ c.flag }} {{ c.name }}
-            </ion-select-option>
-          </ion-select>
+ <ion-select formControlName="country" placeholder="Country" interface="popover">
+  <ion-select-option *ngFor="let c of countries" [value]="c.name">
+    {{ c.flag }} {{ c.name }}
+  </ion-select-option>
+</ion-select>
         </ion-item>
 
         <!-- correo -->
