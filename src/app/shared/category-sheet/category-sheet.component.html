@@ -1,3 +1,17 @@
-<p>
-  category-sheet works!
-</p>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Categories</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list inset="true">
+    <ion-item button *ngFor="let c of categories" (click)="pick(c)">
+      <ion-label>{{ c | titlecase }}</ion-label>
+      <ion-icon slot="end" name="checkmark" *ngIf="c===selected"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

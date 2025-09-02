@@ -1,3 +1,13 @@
-<p>
-  news-card works!
-</p>
+<ion-card button (click)="open.emit(article)">
+  <ion-img *ngIf="article.urlToImage" [src]="article.urlToImage"></ion-img>
+
+  <ion-card-header>
+    <ion-card-subtitle>{{ article.source?.name }}</ion-card-subtitle>
+    <ion-card-title>{{ article.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>{{ article.description }}</p>
+    <small>{{ article.publishedAt | date:'fullDate' }}</small>
+  </ion-card-content>
+</ion-card>
