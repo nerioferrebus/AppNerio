@@ -15,6 +15,12 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+  {  
+  path: 'profile',
+  loadChildren: () =>
+    import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
+},
+
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
@@ -26,6 +32,10 @@ const routes: Routes = [
   {
     path: 'article',
     loadChildren: () => import('./pages/article/article.module').then( m => m.ArticlePageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
  
 
