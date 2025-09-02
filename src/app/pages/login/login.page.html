@@ -37,6 +37,7 @@
          type="submit"
      expand="block"
           color="warning"
+          [disabled]="loginForm.invalid"
               (click)="onLogin()"
             >
               Login

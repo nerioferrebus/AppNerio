@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } 
 import { ValueAccessor } from '@ionic/angular/common';
 import { __values } from 'tslib';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../services/auth.services';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -16,25 +16,25 @@ public password!: FormControl;
 public loginForm!: FormGroup;
 public r!: FormBuilder;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private auth: AuthService) {
 
     this.initForm();
-
    }
   
   ngOnInit() {}
 
   onLogin() {
-    console.log('onLogin() disparado');
-    console.log(this.loginForm.value);
+     if (this.loginForm.invalid) { this.loginForm.markAllAsTouched(); return; }
 
     const { email, password } = this.loginForm.value;
+    const res = this.auth.login(email, password);
 
-    if (email && password) {
-      this.router.navigate(['/news']);
-    } else {
-      alert('Usuario o contraseña incorrectos');
+    if (!res.ok) {
+      alert(res.message);               // “Credenciales inválidas”
+      return;
     }
+        this.router.navigate(['/news']);    // ✅ Solo si las credenciales son correctas
+  
   }
 
   // 👇 Esto debe estar afuera de onLogin()

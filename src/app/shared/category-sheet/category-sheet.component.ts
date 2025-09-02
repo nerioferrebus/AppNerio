@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.services';
+
 @Component({
   selector: 'app-category-sheet',
   templateUrl: './category-sheet.component.html',
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 export class CategorySheetComponent implements OnInit {
   @Input() selected: string = 'general';
   categories = ['business', 'entertainment', 'health', 'science', 'sports', 'technology'];
-  constructor(private modalCtrl: ModalController, private router: Router) {}
+  constructor(private modalCtrl: ModalController, private router: Router, private auth: AuthService) {}
   pick(cat: string) {
    this.modalCtrl.dismiss(cat, 'selected'); // envías el valor
   }
@@ -25,4 +27,10 @@ export class CategorySheetComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
   ngOnInit() {}
+logout() {
+    this.modalCtrl.dismiss();   // cerrar la hoja primero
+    this.auth.logout();         // limpiar sesión y navegar a login
+  }
+
+  
 }

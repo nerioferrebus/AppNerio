@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CountriesService, Country } from '../../services/countries.services';
-
+import { AuthService, AppUser } from '../../services/auth.services';  
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -33,7 +33,9 @@ countries22: Array<{ name: string; flag?: string }> = [
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private countriesSrv: CountriesService
+    private countriesSrv: CountriesService,
+    private auth: AuthService,
+
   ) {}
 
   ngOnInit() {
@@ -80,4 +82,16 @@ countries22: Array<{ name: string; flag?: string }> = [
   goToLogin() {
     this.router.navigate(['/login']);
   }
+  onSubmit() {
+    const payload = this.registerForm.value;                 // { firstName, lastName, country, email, password }
+  const res = this.auth.register(payload);
+  if (res.ok) {
+    alert('Usuario registrado');
+    this.router.navigate(['/login']);
+  } else {
+    alert(res.message || 'No se pudo registrar');
+  }
+  }
+
+  
 }
