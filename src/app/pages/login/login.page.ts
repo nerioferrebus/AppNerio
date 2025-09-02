@@ -24,31 +24,35 @@ public r!: FormBuilder;
   
   ngOnInit() {}
 
- public onLogin(){
-  console.log('onLogin() disparado');
-  console.log(this.loginForm.value)
- }
+  onLogin() {
+    console.log('onLogin() disparado');
+    console.log(this.loginForm.value);
 
+    const { email, password } = this.loginForm.value;
 
-
- public goToRegister() {
-  this.router.navigate(['/register']);
-}
-
-
-  private initForm(){
-     this.email = new FormControl('', [Validators.required, Validators.email]);
-         this.password = new FormControl('', [
-          Validators.required, 
-          Validators.minLength(6),
-        Validators.maxLength(12),
-          ]);
-          this.loginForm = new FormGroup({
-            email: this.email,
-           password: this.password,
-         } );
-          
-
+    if (email && password) {
+      this.router.navigate(['/news']);
+    } else {
+      alert('Usuario o contraseña incorrectos');
+    }
   }
 
+  // 👇 Esto debe estar afuera de onLogin()
+  public goToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  private initForm() {
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(12),
+    ]);
+
+    this.loginForm = new FormGroup({
+      email: this.email,
+      password: this.password,
+    });
+  }
 }
