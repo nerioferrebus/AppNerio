@@ -30,14 +30,14 @@ public r!: FormBuilder;
     const res = this.auth.login(email, password);
 
     if (!res.ok) {
-      alert(res.message);               // “Credenciales inválidas”
+      alert(res.message);               // data alertttt
       return;
     }
-        this.router.navigate(['/news']);    // ✅ Solo si las credenciales son correctas
+        this.router.navigate(['/news']);    // information correct
   
   }
 
-  // 👇 Esto debe estar afuera de onLogin()
+  
   public goToRegister() {
     this.router.navigate(['/register']);
   }

@@ -3,15 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-// Estructura del país
+// estructure country :(
 export interface Country {
-  name: string;   // Ejemplo: "Colombia"
-  flag: string;   // Ejemplo: "🇨🇴"
-  iso2?: string;  // Ejemplo: "CO"
-  iso3?: string;  // Ejemplo: "COL"
+  name: string;   
+  flag: string;   
+  iso2?: string;  
+  iso3?: string;  
 }
 
-// Estructura de la respuesta de la API
+
 interface CountriesNowResponse {
   error: boolean;
   msg: string;
@@ -36,11 +36,11 @@ export class CountriesService {
       map(res =>
         (res.data ?? []).map(item => ({
           name: item.name,
-          flag: item.unicodeFlag,   // 👈 corregido
+          flag: item.unicodeFlag,   
           iso2: item.iso2,
           iso3: item.iso3
         }))
-        .sort((a, b) => a.name.localeCompare(b.name, 'es')) // 👈 corregido
+        .sort((a, b) => a.name.localeCompare(b.name, 'es')) 
       )
        );
 }

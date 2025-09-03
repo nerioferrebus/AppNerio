@@ -25,14 +25,16 @@ export class NewsService {
   private base = 'https://newsapi.org/v2';
 
   constructor(private http: HttpClient) {}
-
+private bases = environment.newsApiBase;
   getTopHeadlines(opts: {
     category?: string;
-    country?: string;   // ej: 'us', 'mx', 'co'
+    country?: string;   
     page?: number;
     pageSize?: number;
   }): Observable<NewsResponse> {
-    const headers = new HttpHeaders({ 'X-Api-Key': environment.newsApis });
+    const headers = new HttpHeaders({ 'X-Api-Key': environment.newsApiKey });
+    
+
     let params = new HttpParams()
       .set('country', opts.country ?? 'us')
       .set('page', (opts.page ?? 1).toString())

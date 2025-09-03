@@ -6,7 +6,7 @@ export interface AppUser {
   lastName: string;
   country: string;
   email: string;
-  password: string; // (simple, sin hash mientras no haya backend)
+  password: string; 
 }
 
 const USERS_KEY = 'app.users';
@@ -17,18 +17,18 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
-  // ---- Persistencia básica ----
+  // ---- Persistencia  ----
   private loadUsers(): AppUser[] {
       const raw = JSON.parse(localStorage.getItem(USERS_KEY) || '[]') as AppUser[];
 
-  // Si la contraseña no parece SHA-256 (64 hex), la hasheamos.
+  
   const hex64 = /^[a-f0-9]{64}$/i;
   const normalized = raw.map(u => ({
     ...u,
     password: hex64.test(u.password) ? u.password : this.hashPassword(u.password),
   }));
 
-  // Guardamos de vuelta si hubo cambios
+  // save again if have any change
   if (JSON.stringify(raw) !== JSON.stringify(normalized)) {
     this.saveUsers(normalized);
   }
@@ -42,7 +42,7 @@ export class AuthService {
     return CryptoJS.SHA256(password).toString();
   }
 
-  // ---- Registro ----
+  // signup
   register(user: AppUser): { ok: boolean; message?: string } {
     const users = this.loadUsers();
     const exists = users.some(u => u.email.toLowerCase() === user.email.toLowerCase());
@@ -53,7 +53,7 @@ export class AuthService {
     return { ok: true };
   }
 
-  // ---- Login ----
+  //login
   login(email: string, password: string): { ok: boolean; message?: string } {
     email = email.trim();
     password = password.trim();
@@ -70,7 +70,7 @@ const hashed = this.hashPassword(password);
     return { ok: true };
   }
 
-  // ---- Sesión ----
+  
   isLoggedIn(): boolean {
     return !!localStorage.getItem(SESSION_KEY);
   }
